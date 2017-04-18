@@ -1,4 +1,4 @@
-# This is lab testing in google cloud for kubernetes
+# Lab setup for Kubernetes on Centos 7 using Google Cloud compute engine.
 
 # - Pre Steps:
 
