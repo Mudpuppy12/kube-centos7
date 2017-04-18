@@ -19,6 +19,8 @@
     service: name=ntpd state=started
   - name: ensure etcd is at the latest version
     yum: name=etcd state=latest
+  - name: ensure flannel is at the latest version
+    yum: name=flannel state=latest
   - name: ensure kubernetes is at the latest version
     yum: name=kubernetes state=latest
   - name: Turn off selinux

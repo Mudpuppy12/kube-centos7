@@ -64,6 +64,18 @@
         state: present
         regexp: '^KUBE_CONTROLLER_MANAGER_ARGS='
         line: 'KUBE_CONTROLLER_MANAGER_ARGS="--service_account_private_key_file=/etc/kubernetes/servieaccount.key"'
+   - name: Adding Flannel endpoint
+     lineinfile:
+        name: /etc/sysconfig/flanneld
+        state: present
+        regexp: '^FLANNEL_ETCD_ENDPOINTS='
+        line: 'FLANNEL_ETCD_ENDPOINTS="http://kube-master:2379"'
+   - name: Adding Flannel Prefix
+     lineinfile:
+        name: /etc/sysconfig/flanneld
+        state: present
+        regexp: '^FLANNEL_ETCD_PREFIX='
+        line: 'FLANNEL_ETCD_PREFIX="/kube-centos/network"'
 
 - hosts: minions
   remote_user: root
@@ -118,3 +130,15 @@
         state: present
         regexp: '^KUBE_API_ARGS='
         line: 'KUBE_API_ARGS="--service-account_key_file=/etc/kubernetes/serviceaccount.key"'
+   - name: Adding Flannel endpoint
+     lineinfile:
+        name: /etc/sysconfig/flanneld
+        state: present
+        regexp: '^FLANNEL_ETCD_ENDPOINTS='
+        line: 'FLANNEL_ETCD_ENDPOINTS="http://kube-master:2379"'
+   - name: Adding Flannel Prefix
+     lineinfile:
+        name: /etc/sysconfig/flanneld
+        state: present
+        regexp: '^FLANNEL_ETCD_PREFIX='
+        line: 'FLANNEL_ETCD_PREFIX="/kube-centos/network"'

@@ -13,16 +13,19 @@
     service: name=kube-controller-manager state=stopped enabled=yes
   - name: Make sure that kube-scheduler is stopped
     service: name=kube-scheduler state=stopped enabled=yes
-
+  - name: Make sure that flannel is stopped
+    service: name=flanneld state=stopped enabled=yes
 - hosts: minions
   remote_user: root
 
   tasks:
   - name: Make sure that ntpd is stopped
     service: name=ntpd state=stopped enabled=yes
-  - name: Make sure that kube-proxy is started
+  - name: Make sure that kube-proxy is stopped
     service: name=kube-proxy state=stopped enabled=yes
   - name: Make sure that kubelet is stopped
     service: name=kubelet state=stopped enabled=yes
   - name: Make sure that docker is stopped
     service: name=docker state=stopped enabled=yes
+  - name: Make sure that flannel is stopped
+    service: name=flanneld state=stopped enabled=yes
