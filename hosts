@@ -1,0 +1,9 @@
+[master]
+kube-master
+
+[minions]
+kube-minion1
+kube-minion2
+kube-minion3
+kube-minion4
+
