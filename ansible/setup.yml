@@ -1,0 +1,31 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Add Docker repository
+    yum_repository:
+       name: virt7-docker-common-release
+       description: Docker Repo
+       baseurl: http://cbs.centos.org/repos/virt7-docker-common-release/x86_64/os/
+
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: ensure ntp is at the latest version
+    yum: name=ntp state=latest
+  - name: Make sure that ntpd is started
+    service: name=ntpd state=started
+  - name: ensure etcd is at the latest version
+    yum: name=etcd state=latest
+  - name: ensure kubernetes is at the latest version
+    yum: name=kubernetes state=latest
+
+- hosts: minions
+  remote_user: root
+
+  tasks:
+  - name: ensure docker is at the latest version
+    yum: name=docker state=latest
+
