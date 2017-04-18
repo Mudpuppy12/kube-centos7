@@ -1,0 +1,15 @@
+---
+- hosts: master
+  remote_user: root
+
+  tasks:
+  - name: Make sure that ntpd is started
+    service: name=ntpd state=stopped enabled=yes
+  - name: Make sure that etcd is started
+    service: name=etcd state=stopped enabled=yes
+  - name: Make sure that kube-apiserver is started
+    service: name=kube-apiserver state=stopped enabled=yes
+  - name: Make sure that kube-controller-manager is started
+    service: name=kube-controller-manager state=stopped enabled=yes
+  - name: Make sure that kube-scheduler is started
+    service: name=kube-scheduler state=stopped enabled=yes
