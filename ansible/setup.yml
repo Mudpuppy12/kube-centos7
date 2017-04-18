@@ -21,6 +21,9 @@
     yum: name=etcd state=latest
   - name: ensure kubernetes is at the latest version
     yum: name=kubernetes state=latest
+  - name: Turn off selinux
+    selinux:
+       state: disabled
 
 - hosts: minions
   remote_user: root
@@ -28,4 +31,23 @@
   tasks:
   - name: ensure docker is at the latest version
     yum: name=docker state=latest
+
+- hosts: localhost
+  remote_user: root
+  
+  tasks:
+  - name: Create API KEY
+    shell: openssl genrsa -out /tmp/serviceaccount.key 2048
+
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Push API KEY
+    copy:
+        src: /tmp/serviceaccount.key  
+        dest: /etc/kubernetes/servieaccount.key
+        owner: root
+        group: root
+        mode: 0644
 

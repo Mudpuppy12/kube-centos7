@@ -9,12 +9,24 @@
         state: present
         regexp: '^KUBE_ETCD_SERVERS='
         line: 'KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"'
+   - name: Adding etcd servers
+     lineinfile:
+        name: /etc/kubernetes/config
+        state: present
+        regexp: '^KUBE_ETCD_SERVERS='
+        line: 'KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"'
    - name: Adding kube api addresses
      lineinfile:
         name: /etc/kubernetes/apiserver
         state: present
         regexp: '^KUBE_API_ADDRESS='
         line: 'KUBE_API_ADDRESS="--address=0.0.0.0"'
+   - name: Adding kube api KEY
+     lineinfile:
+        name: /etc/kubernetes/apiserver
+        state: present
+        regexp: '^KUBE_API_ARGS='
+        line: 'KUBE_API_ARGS="--service-account_key_file=/etc/kubernetes/servieaccount.key"'
    - name: Adding kube api port
      lineinfile:
         name: /etc/kubernetes/apiserver
@@ -46,7 +58,12 @@
         state: present
         regexp: '^ETCD_ADVERTISE_CLIENT_URLS='
         line: 'ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379"'
-
+   - name: Adding kube api key to controller-manager
+     lineinfile:
+        name: /etc/kubernetes/controller-manager
+        state: present
+        regexp: '^KUBE_CONTROLLER_MANAGER_ARGS='
+        line: 'KUBE_CONTROLLER_MANAGER_ARGS="--service_account_private_key_file=/etc/kubernetes/servieaccount.key"'
 
 - hosts: minions
   remote_user: root
@@ -62,6 +79,12 @@
    - name: Adding etcd servers
      lineinfile:
         name: /etc/kubernetes/apiserver
+        state: present
+        regexp: '^KUBE_ETCD_SERVERS='
+        line: 'KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"'
+   - name: Adding etcd servers
+     lineinfile:
+        name: /etc/kubernetes/config
         state: present
         regexp: '^KUBE_ETCD_SERVERS='
         line: 'KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"'
@@ -89,3 +112,9 @@
         state: present
         regexp: '^KUBELET_API_SERVER='
         line: 'KUBELET_API_SERVER="--api-servers=http://kube-master:8080"'
+   - name: Adding kube api KEY
+     lineinfile:
+        name: /etc/kubernetes/apiserver
+        state: present
+        regexp: '^KUBE_API_ARGS='
+        line: 'KUBE_API_ARGS="--service-account_key_file=/etc/kubernetes/serviceaccount.key"'
