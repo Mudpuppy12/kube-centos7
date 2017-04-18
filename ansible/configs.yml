@@ -48,3 +48,44 @@
         line: 'ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379"'
 
 
+- hosts: minions
+  remote_user: root
+  tasks:
+
+   - name: Adding cube master server
+     lineinfile:
+        name: /etc/kubernetes/config
+        state: present
+        regexp: '^KUBE_MASTER='
+        line: 'KUBE_MASTER="--master=http://kube-master:8080"'
+
+   - name: Adding etcd servers
+     lineinfile:
+        name: /etc/kubernetes/apiserver
+        state: present
+        regexp: '^KUBE_ETCD_SERVERS='
+        line: 'KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"'
+   - name: Adding kubelete addresses
+     lineinfile:
+        name: /etc/kubernetes/kubelet
+        state: present
+        regexp: '^KUBELET_ADDRESS='
+        line: 'KUBELET_ADDRESS="--address=0.0.0.0"'
+   - name: Adding kubelete port
+     lineinfile:
+        name: /etc/kubernetes/kubelet
+        state: present
+        regexp: '^KUBELET_PORT='
+        line: 'KUBELET_PORT="--port=10250"'
+   - name: Adding kubelete hostname
+     lineinfile:
+        name: /etc/kubernetes/kubelet
+        state: present
+        regexp: '^KUBELET_HOSTNAME='
+        line: 'KUBELET_HOSTNAME="--hostname-override={{ ansible_hostname }}"'
+   - name: Adding kubelete api-server
+     lineinfile:
+        name: /etc/kubernetes/kubelet
+        state: present
+        regexp: '^KUBELET_API_SERVER='
+        line: 'KUBELET_API_SERVER="--api-servers=http://kube-master:8080"'

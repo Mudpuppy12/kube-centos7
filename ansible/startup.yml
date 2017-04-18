@@ -13,3 +13,16 @@
     service: name=kube-controller-manager state=started enabled=yes
   - name: Make sure that kube-scheduler is started
     service: name=kube-scheduler state=started enabled=yes
+
+- hosts: minions
+  remote_user: root
+
+  tasks:
+  - name: Make sure that ntpd is started
+    service: name=ntpd state=started enabled=yes
+  - name: Make sure that kube-proxy is started
+    service: name=kube-proxy state=started enabled=yes
+  - name: Make sure that kubelet is started
+    service: name=kubelet state=started enabled=yes
+  - name: Make sure that docker is started
+    service: name=docker state=started enabled=yes
