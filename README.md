@@ -16,4 +16,4 @@
 
 # Useful Links:
 https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
-
+http://www.tothenew.com/blog/how-to-install-kubernetes-on-centos/
