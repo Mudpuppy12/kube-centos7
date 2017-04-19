@@ -17,3 +17,9 @@
 # Useful Links:
 https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
 http://www.tothenew.com/blog/how-to-install-kubernetes-on-centos/
+http://terrenceryan.com/blog/index.php/making-kubernetes-ip-addresses-static-on-google-container-engine/
+
+# BUGS
+I can't seem to get service load-balancer working with GCE. There apparenly is some additional configuration, but is not documented well at all.
+So auto-creation of external LB will not work
+
