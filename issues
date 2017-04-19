@@ -9,3 +9,10 @@ Docker wasn't getting the first address on the flannel network.
 
 Fix: Restarted / and added flanneld to start before docker
 
+load balancer not working in gce,
+https://kubernetes.io/docs/getting-started-guides/scratch/#cloud-provider
+added --cloud-provider to startup, but now failing authentication
+
+https://kubernetes.io/docs/getting-started-guides/gce/
+
+build that instance, tried to get gce.conf, no luck
