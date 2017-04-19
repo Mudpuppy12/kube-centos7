@@ -5,4 +5,7 @@ No API token found for service account "default"
 Fix:
 https://github.com/kubernetes/kubernetes/issues/11355#issuecomment-127378691
 
+Docker wasn't getting the first address on the flannel network.
+
+Fix: Restarted / and added flanneld to start before docker
 
