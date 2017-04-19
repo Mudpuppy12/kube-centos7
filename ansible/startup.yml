@@ -29,7 +29,7 @@
     service: name=kube-proxy state=started enabled=yes
   - name: Make sure that kubelet is started
     service: name=kubelet state=started enabled=yes
-  - name: Make sure that docker is started
-    service: name=docker state=started enabled=yes
   - name: Make sure that flannel is started
     service: name=flanneld state=started enabled=yes
+  - name: Make sure that docker is started
+    service: name=docker state=started enabled=yes
